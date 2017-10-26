@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>echarts-demo</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+
+
+</body>
+<div id="cont" class="cont" style="width:700px;height:400px"></div> 
+<script type="text/javascript" src="./js/echarts-all.js"></script>
+<script type="text/javascript">
+
+var xData1 = ['周一','周二','周三','周四','周五','周六','周日']
+var data1 = [11, 11, 15, 13, 12, 13, 10];
+
+draw(xData1, data1);
+
+var xData2 = []
+var data2 = [];
+
+function draw(xData, data) {
+	option = {
+		// 标题
+	    title : {
+	        text: '未来一周气温变化',
+	        // 小标题
+	        subtext: '纯属虚构'
+	    },
+	    // 鼠标悬浮标签 根据纵坐标是：axis，根据坐标点是：item
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    // 标签类目
+	    legend: {
+	        data:['最高气温','最低气温']
+	    },
+	    // 工具栏这个一般不需要
+	    toolbox: {
+	    	// 隐藏
+	        show : false,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    // 是否拖拽重计算，这个也比较多余
+	    calculable : false,
+	    // x轴配置
+	    xAxis : [
+	        {
+	            type : 'category',
+	            boundaryGap : false,
+	            data : xData
+	        }
+	    ],
+	    // y轴配置
+	    yAxis : [
+	        {
+	            type : 'value',
+	            axisLabel : {
+	                formatter: '{value} °C'
+	            }
+	        }
+	    ],
+	    // 主数据
+	    series : [
+	        {
+	            name:'最高气温',
+	            // 图画类型
+	            type:'line',
+	            data:data,
+	        //     // 标注点
+	        //     markPoint : {
+	        //         data : [
+	        //             {type : 'max', name: '最大值'},
+	        //             {type : 'min', name: '最小值'}
+	        //         ]
+	        //     },
+	        //     // 标注线
+	        //     markLine : {
+	        //         data : [
+	        //             {type : 'average', name: '平均值'}
+	        //         ]
+	        //     }
+	        // },
+	        // // 多条线分割
+	        // {
+	        //     name:'最低气温',
+	        //     type:'line',
+	        //     data:[1, -2, 2, 5, 3, 2, 0],
+	        //     markPoint : {
+	        //         data : [
+	        //             {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+	        //         ]
+	        //     },
+	        //     markLine : {
+	        //         data : [
+	        //             {type : 'average', name : '平均值'}
+	        //         ]
+	        //     }
+	        }
+	    ]
+	};
+
+	// 初始化图表插件，传入一个载体dom元素
+	var myChart = echarts.init(document.getElementById("cont")) ;
+	// 传入设置好的参数
+	myChart.setOption(option, true);
+}
+	
+</script>
+</html>
